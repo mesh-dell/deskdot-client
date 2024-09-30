@@ -4,11 +4,11 @@ import { faUser, faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
   return (
-    <div className="text-dark-green mx-10 flex h-16 items-center justify-between border-b-[6px]">
-      <Link to={"/"} className="text-2xl font-bold">
+    <div className="text-dark-green mx-6 md:mx-10 flex h-16 items-center border-b-[6px] justify-between">
+      <Link to={"/"} className="md:text-2xl font-bold">
         Deskdot
       </Link>
-      <div className="text-lg *:ml-9">
+      <div className="md:text-lg md:*:ml-9 *:ml-7">
         <Link to={"/"}>Home</Link>
         <Link to={"/shop"}>Shop</Link>
         <Link to={"/account"}>
