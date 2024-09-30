@@ -16,7 +16,7 @@ export default function HeroesSection() {
         </Link>
       </div>
       <img
-        className="md:my-0 md:max-w-lg my-3"
+        className="my-3 md:my-0 md:max-w-lg"
         src="/illustrationHero.png"
         alt="Heroes section image"
       />
