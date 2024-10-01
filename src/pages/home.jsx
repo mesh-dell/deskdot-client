@@ -1,8 +1,8 @@
-import NavBar from "../components/navbar";
-import HeroesSection from "../components/heroes";
-import ProductSection from "../components/productSection";
-import CallToAction from "../components/cta";
-import Footer from "../components/footer";
+import NavBar from "../components/home/navbar";
+import HeroesSection from "../components/home/heroes";
+import ProductSection from "../components/home/productSection";
+import CallToAction from "../components/home/cta";
+import Footer from "../components/home/footer";
 
 export default function HomePage() {
   return (
