@@ -1,6 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function BreadCrumb() {
+  const location = useLocation().pathname;
+  const pattern = /shop\/+/i;
   return (
     <div className="flex items-center justify-center space-x-3 text-dark-green md:text-xl md:font-semibold">
       <NavLink
@@ -13,13 +15,29 @@ export default function BreadCrumb() {
       </NavLink>
       <p>/</p>
       <NavLink
-        className={({ isActive }) =>
-          isActive ? "text-medium-blue" : "text-dark-green"
+        className={
+          !location.match(pattern) ? "text-medium-blue" : "text-dark-green"
         }
         to={"/shop"}
       >
         Shop
       </NavLink>
+
+      {location.match(pattern) ? (
+        <>
+          <p>/</p>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-medium-blue" : "text-dark-green"
+            }
+            to={"."}
+          >
+            {location.split("/").splice(-1)[0]}
+          </NavLink>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
