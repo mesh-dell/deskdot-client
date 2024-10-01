@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard({ productId }) {
   return (
-    <Link to={"/shop/:productId"}>
+    <Link to={`/shop/${productId}`}>
       <div className="flex w-full flex-col items-center space-y-2 bg-light-white p-3 text-center text-dark-green md:w-fit">
         <div className="h-48 w-52 bg-light-grey">Image</div>
         <h1 className="text-xl">Visocin Stapeler</h1>
