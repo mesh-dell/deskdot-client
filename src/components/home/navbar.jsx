@@ -4,7 +4,7 @@ import { faUser, faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
   return (
-    <div className="text-dark-green flex h-14 items-center justify-between border-b-4 md:h-16 md:border-b-[6px]">
+    <div className="flex h-14 items-center justify-between border-b-4 border-dark-green text-dark-green md:h-16 md:border-b-[6px]">
       <Link to={"/"} className="font-bold md:text-2xl">
         Deskdot
       </Link>
