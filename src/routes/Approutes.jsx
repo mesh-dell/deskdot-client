@@ -4,6 +4,7 @@ import HomePage from "../pages/home";
 import Shop from "../pages/shop";
 import ProductPage from "../pages/product-page";
 import Cart from "../pages/cart";
+import Account from "../pages/account";
 
 export default function AppRoutes() {
   const router = createBrowserRouter([
@@ -23,6 +24,10 @@ export default function AppRoutes() {
     {
       path: "/cart",
       element: <Cart />,
+    },
+    {
+      path: "/account",
+      element: <Account />,
     },
   ]);
 
