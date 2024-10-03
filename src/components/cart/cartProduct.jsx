@@ -12,7 +12,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 // Todo Set maximum quantity to maximum in stock
 export default function CartProduct() {
   return (
-    <div className="flex flex-col items-center space-y-5 bg-light-white py-3 text-dark-green md:w-2/5 md:flex-row md:space-y-0 md:py-0 *:space-y-2">
+    <div className="flex flex-col items-center space-y-5 bg-light-white py-3 text-dark-green *:space-y-2 md:flex-row md:space-y-0 md:py-0">
       <div className="h-40 w-40 bg-light-grey">image</div>
       <div className="md:ml-5 md:space-y-10">
         <h1 className="text-xl font-semibold">Visocin Stapeler</h1>
