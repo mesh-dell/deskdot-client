@@ -9,7 +9,7 @@ export default function SideBar() {
         <Link to={"/account/settings"}>Settings</Link>
       </div>
 
-      <button className="rounded-md bg-light-green px-6 py-1 font-semibold">
+      <button className="rounded-md bg-light-green px-6 py-2 font-semibold">
         Log Out
       </button>
     </div>
