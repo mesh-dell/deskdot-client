@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function SideBar() {
   return (
-    <div className="hidden w-1/6 space-y-20 text-dark-green md:block">
+    <div className="hidden space-y-20 text-dark-green md:block">
       <div className="flex flex-col space-y-12 font-semibold">
         <Link to={"/account"}>My Account</Link>
         <Link to={"/account/orders"}>Orders</Link>
