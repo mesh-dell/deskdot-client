@@ -7,6 +7,7 @@ import Cart from "../pages/cart";
 import Account from "../pages/account";
 import AccountInfo from "./account/accountInfo";
 import Orders from "./account/orders";
+import OrderDetails from "./account/orderDetails";
 
 export default function AppRoutes() {
   const router = createBrowserRouter([
@@ -38,6 +39,10 @@ export default function AppRoutes() {
         {
           path: "/account/orders",
           element: <Orders />,
+        },
+        {
+          path: "/account/orders/:orderId",
+          element: <OrderDetails />,
         },
       ],
     },
