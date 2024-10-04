@@ -1,6 +1,6 @@
 export default function OrderItem() {
   return (
-    <div className="block bg-light-white text-center text-dark-green *:space-y-3 md:flex md:w-1/2 md:text-left md:py-0 py-2">
+    <div className="block bg-light-white py-2 text-center text-dark-green *:space-y-3 md:flex md:py-0 md:text-left">
       <div className="mx-auto h-40 w-40 bg-light-grey md:mx-0">image</div>
       <div className="flex flex-col justify-evenly md:ml-3">
         <h1 className="text-xl font-semibold">Visocin Stapeler</h1>

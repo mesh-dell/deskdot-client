@@ -13,15 +13,17 @@ import OrderItem from "../../components/orders/orderItem";
 
 export default function OrderDetails() {
   return (
-    <div className="text-dark-green space-y-5">
-      <div className="flex justify-between mb-5 items-center">
+    <div className="space-y-5 text-dark-green">
+      <div className="mb-5 flex items-center justify-between">
         <h1 className="font-semibold">Order Details</h1>
-        <button className="bg-light-green font-semibold px-6 py-2 rounded-md">Cancel</button>
+        <button className="rounded-md bg-light-green px-6 py-2 font-semibold">
+          Cancel
+        </button>
       </div>
 
       <TableContainer className="font-sans text-dark-green">
         <Table variant="striped" size={"md"}>
-          <TableCaption>Your Orders</TableCaption>
+          <TableCaption>Your Order</TableCaption>
           <Thead>
             <Tr>
               <Th>#Order ID</Th>
@@ -39,7 +41,12 @@ export default function OrderDetails() {
         </Table>
       </TableContainer>
 
-      <OrderItem />
+      <div className="grid-cols-2 gap-4 space-y-4 md:grid md:space-y-0">
+        <OrderItem />
+        <OrderItem />
+        <OrderItem />
+        <OrderItem />
+      </div>
     </div>
   );
 }
