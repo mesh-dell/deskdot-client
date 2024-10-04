@@ -10,7 +10,7 @@ export default function Account() {
       <NavBar />
       <div className="items-start md:flex">
         <div>
-          <div className="my-10 flex items-center justify-around md:my-0 md:block">
+          <div className="my-10 flex items-center justify-between md:my-0 md:block">
             <LoginInfo />
             <ProfileMenu />
           </div>
