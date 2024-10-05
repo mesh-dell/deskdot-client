@@ -10,6 +10,7 @@ import Orders from "./account/orders";
 import OrderDetails from "./account/orderDetails";
 import Settings from "./account/settings";
 import SignUp from "../pages/signup";
+import SignIn from "../pages/signin";
 
 export default function AppRoutes() {
   const router = createBrowserRouter([
@@ -55,6 +56,10 @@ export default function AppRoutes() {
     {
       path: "/signup",
       element: <SignUp />,
+    },
+    {
+      path: "/signin",
+      element: <SignIn />,
     },
   ]);
 
