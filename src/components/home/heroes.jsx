@@ -9,7 +9,7 @@ export default function HeroesSection() {
           Your One-Stop Shop for Smart Office Solutions
         </h3>
         <Link
-          className="bg-dark-green text-white rounded-md px-6 py-2 md:px-4 md:py-2 md:text-lg"
+          className="bg-dark-green text-white rounded-md px-6 py-2 md:px-6 md:py-3 md:text-lg"
           to={"/signup"}
         >
           Get Started
