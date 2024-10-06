@@ -1,16 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "../pages/error-page";
-import HomePage from "../pages/home";
-import Shop from "../pages/shop";
-import ProductPage from "../pages/product-page";
-import Cart from "../pages/cart";
-import Account from "../pages/account";
+import ErrorPage from "../pages/buyer/error-page";
+import HomePage from "../pages/buyer/home";
+import Shop from "../pages/buyer/shop";
+import ProductPage from "../pages/buyer/product-page";
+import Cart from "../pages/buyer/cart";
+import Account from "../pages/buyer/account";
 import AccountInfo from "./account/accountInfo";
 import Orders from "./account/orders";
 import OrderDetails from "./account/orderDetails";
 import Settings from "./account/settings";
-import SignUp from "../pages/signup";
-import SignIn from "../pages/signin";
+import SignUp from "../pages/buyer/signup";
+import SignIn from "../pages/buyer/signin";
 // Seller
 import SignUpSeller from "../pages/seller/signup";
 import StoreSetup from "../pages/seller/storeSetup";
@@ -65,6 +65,8 @@ export default function AppRoutes() {
       path: "/signin",
       element: <SignIn />,
     },
+
+    // Seller
     {
       path: "/signup/seller",
       element: <SignUpSeller />,
@@ -74,8 +76,12 @@ export default function AppRoutes() {
       element: <StoreSetup />,
     },
     {
-      path: "signin/seller",
+      path: "/signin/seller",
       element: <SignInSeller />,
+    },
+    {
+      path: "/account/seller",
+      element: <div>Seller Account</div>,
     },
   ]);
 
