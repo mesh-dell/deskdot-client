@@ -14,6 +14,7 @@ import SignIn from "../pages/signin";
 // Seller
 import SignUpSeller from "../pages/seller/signup";
 import StoreSetup from "../pages/seller/storeSetup";
+import SignInSeller from "../pages/seller/signin";
 
 export default function AppRoutes() {
   const router = createBrowserRouter([
@@ -71,6 +72,10 @@ export default function AppRoutes() {
     {
       path: "/signup/store/seller",
       element: <StoreSetup />,
+    },
+    {
+      path: "signin/seller",
+      element: <SignInSeller />,
     },
   ]);
 
