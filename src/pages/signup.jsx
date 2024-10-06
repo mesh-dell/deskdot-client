@@ -44,7 +44,10 @@ export default function SignUp() {
         </button>
 
         <p className="text-center">
-          Already have an account ? <Link className="font-bold" to={"/signin"}>Sign in</Link>
+          Already have an account ?{" "}
+          <Link className="font-bold" to={"/signin"}>
+            Sign in
+          </Link>
         </p>
       </Form>
     </div>
