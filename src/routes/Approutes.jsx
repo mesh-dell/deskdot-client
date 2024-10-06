@@ -81,7 +81,7 @@ export default function AppRoutes() {
     },
     {
       path: "/account/seller",
-      element: <div>Seller Account</div>,
+      element: <div>Seller account</div>,
     },
   ]);
 
