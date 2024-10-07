@@ -20,6 +20,7 @@ export default function RecentOrders() {
             <Th>#Product ID</Th>
             <Th>Quantity</Th>
             <Th>Status</Th>
+            <Th>Order Date</Th>
             <Th>Order Cost</Th>
           </Tr>
         </Thead>
@@ -29,6 +30,7 @@ export default function RecentOrders() {
             <Td>5</Td>
             <Td>10</Td>
             <Td>Shipped</Td>
+            <Td>24th June 2024</Td>
             <Td>ksh. 890</Td>
           </Tr>
           <Tr>
@@ -36,6 +38,7 @@ export default function RecentOrders() {
             <Td>5</Td>
             <Td>10</Td>
             <Td>Shipped</Td>
+            <Td>24th June 2024</Td>
             <Td>ksh. 890</Td>
           </Tr>
           <Tr>
@@ -43,6 +46,7 @@ export default function RecentOrders() {
             <Td>5</Td>
             <Td>10</Td>
             <Td>Shipped</Td>
+            <Td>24th June 2024</Td>
             <Td>ksh. 890</Td>
           </Tr>
         </Tbody>
