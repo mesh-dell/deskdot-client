@@ -1,9 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
-  const location = useLocation().pathname;
   return (
     <div className="flex h-14 items-center justify-between border-b-4 border-dark-green text-dark-green md:h-16 md:border-b-[6px]">
       <Link to={"/"} className="font-bold md:text-2xl">
@@ -11,19 +10,13 @@ export default function NavBar() {
       </Link>
       <div className="*:ml-9 md:text-lg md:*:ml-9">
         <Link to={"/"}>Home</Link>
-        {!location.includes("seller") ? <Link to={"/shop"}>Shop</Link> : <></>}
-
+        <Link to={"/shop"}>Shop</Link>
         <Link to={"/account"}>
           <FontAwesomeIcon icon={faUser} />
         </Link>
-        
-        {!location.includes("seller") ? (
-          <Link to={"/cart"}>
-            <FontAwesomeIcon icon={faBagShopping} />
-          </Link>
-        ) : (
-          <></>
-        )}
+        <Link to={"/cart"}>
+          <FontAwesomeIcon icon={faBagShopping} />
+        </Link>
       </div>
     </div>
   );
