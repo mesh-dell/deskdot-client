@@ -17,6 +17,7 @@ import StoreSetup from "../pages/seller/storeSetup";
 import SignInSeller from "../pages/seller/signin";
 import AccountSeller from "../pages/seller/account";
 import AccountInfoSeller from "./seller/accountInfo";
+import OrdersSeller from "./seller/orders";
 
 export default function AppRoutes() {
   const router = createBrowserRouter([
@@ -91,6 +92,7 @@ export default function AppRoutes() {
         },
         {
           path: "/account/seller/orders",
+          element: <OrdersSeller />,
         },
         {
           path: "/account/seller/products",
