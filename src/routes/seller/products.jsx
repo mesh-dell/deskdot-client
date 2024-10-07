@@ -7,14 +7,14 @@ export default function Products() {
       <div className="flex items-center justify-between">
         <h1 className="font-semibold">Your Products</h1>
         <Link
-          to={"/create-product"}
+          to={"/seller/products/create"}
           className="rounded-md bg-light-green px-6 py-2 font-semibold"
         >
           Add Product
         </Link>
       </div>
 
-      <div className="md:grid grid-cols-2 gap-5 md:space-y-0 space-y-3">
+      <div className="grid-cols-2 gap-5 space-y-3 md:grid md:space-y-0">
         <ProductCard />
         <ProductCard />
         <ProductCard />
