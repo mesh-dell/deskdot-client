@@ -21,6 +21,7 @@ import OrdersSeller from "./seller/orders";
 import Products from "./seller/products";
 import CreateProduct from "../pages/seller/createProduct";
 import EditProduct from "../pages/seller/editProduct";
+import SettingsSeller from "./seller/settings";
 
 export default function AppRoutes() {
   const router = createBrowserRouter([
@@ -103,6 +104,7 @@ export default function AppRoutes() {
         },
         {
           path: "/account/seller/settings",
+          element: <SettingsSeller />
         },
       ],
     },
