@@ -20,6 +20,7 @@ import AccountInfoSeller from "./seller/accountInfo";
 import OrdersSeller from "./seller/orders";
 import Products from "./seller/products";
 import CreateProduct from "../pages/seller/createProduct";
+import EditProduct from "../pages/seller/editProduct";
 
 export default function AppRoutes() {
   const router = createBrowserRouter([
@@ -108,6 +109,10 @@ export default function AppRoutes() {
     {
       path: "/seller/products/create",
       element: <CreateProduct />,
+    },
+    {
+      path: "/seller/products/:productId/edit",
+      element: <EditProduct />,
     },
   ]);
 

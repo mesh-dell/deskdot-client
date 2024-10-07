@@ -13,8 +13,8 @@ export default function ProductCard() {
         <h2>Ksh 450</h2>
       </div>
       <div className="space-x-3 underline md:mx-16">
-        <Link>Edit</Link>
-        <Link className="text-light-grey">Delete</Link>
+        <Link to={"/seller/products/1/edit"}>Edit</Link>
+        <button className="text-light-grey underline">Delete</button>
       </div>
     </div>
   );
