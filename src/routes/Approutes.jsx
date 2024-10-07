@@ -16,6 +16,7 @@ import SignUpSeller from "../pages/seller/signup";
 import StoreSetup from "../pages/seller/storeSetup";
 import SignInSeller from "../pages/seller/signin";
 import AccountSeller from "../pages/seller/account";
+import AccountInfoSeller from "./seller/accountInfo";
 
 export default function AppRoutes() {
   const router = createBrowserRouter([
@@ -84,6 +85,10 @@ export default function AppRoutes() {
       path: "/account/seller",
       element: <AccountSeller />,
       children: [
+        {
+          path: "/account/seller",
+          element: <AccountInfoSeller />,
+        },
         {
           path: "/account/seller/orders",
         },
