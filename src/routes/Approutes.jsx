@@ -78,7 +78,11 @@ export default function AppRoutes() {
       path: "/sellers",
       element: <DiscoverSellers />,
     },
-    
+    {
+      path: "/shop/seller/:sellerId",
+      element: <Shop />,
+    },
+
     // Seller
     {
       path: "/signup/seller",
