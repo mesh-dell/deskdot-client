@@ -23,7 +23,7 @@ export default function Footer({ isSeller }) {
               <Link to={"/signup"}>Register</Link>
             </li>
             <li>
-              <Link>Explore Sellers</Link>
+              <Link to={"/sellers"}>Explore Sellers</Link>
             </li>
           </ul>
         </div>
