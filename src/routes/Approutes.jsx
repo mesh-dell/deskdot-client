@@ -11,6 +11,7 @@ import OrderDetails from "./account/orderDetails";
 import Settings from "./account/settings";
 import SignUp from "../pages/buyer/signup";
 import SignIn from "../pages/buyer/signin";
+import DiscoverSellers from "../pages/buyer/discoverSellers";
 // Seller
 import SignUpSeller from "../pages/seller/signup";
 import StoreSetup from "../pages/seller/storeSetup";
@@ -73,6 +74,11 @@ export default function AppRoutes() {
       element: <SignIn />,
     },
 
+    {
+      path: "/sellers",
+      element: <DiscoverSellers />,
+    },
+    
     // Seller
     {
       path: "/signup/seller",
@@ -104,7 +110,7 @@ export default function AppRoutes() {
         },
         {
           path: "/account/seller/settings",
-          element: <SettingsSeller />
+          element: <SettingsSeller />,
         },
       ],
     },
