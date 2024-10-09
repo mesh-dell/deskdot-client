@@ -22,7 +22,21 @@ export default function BreadCrumb() {
       >
         Shop
       </NavLink>
-
+      {location.includes("seller") ? (
+        <>
+          <p>/</p>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-medium-blue" : "text-dark-green"
+            }
+            to={"/sellers"}
+          >
+            Sellers
+          </NavLink>
+        </>
+      ) : (
+        <></>
+      )}
       {location.match(pattern) ? (
         <>
           <p>/</p>
