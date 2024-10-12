@@ -27,12 +27,16 @@ import SettingsSeller from "./seller/settings";
 // Actions
 import { action as signinAction } from "../pages/buyer/signin";
 
+// loaders
+import { loader as homeProductLoader } from "../components/home/productSection";
+
 export default function AppRoutes() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <HomePage />,
       errorElement: <ErrorPage />,
+      loader: homeProductLoader,
     },
     {
       path: "/shop",
