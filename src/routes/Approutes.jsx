@@ -26,6 +26,7 @@ import SettingsSeller from "./seller/settings";
 
 // Actions
 import { action as signinAction } from "../pages/buyer/signin";
+import { action as signupAction } from "../pages/buyer/signup";
 
 // loaders
 import { loader as homeProductLoader } from "../components/home/productSection";
@@ -75,6 +76,7 @@ export default function AppRoutes() {
     {
       path: "/signup",
       element: <SignUp />,
+      action: signupAction,
     },
     {
       path: "/signin",
