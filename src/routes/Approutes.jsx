@@ -24,6 +24,9 @@ import CreateProduct from "../pages/seller/createProduct";
 import EditProduct from "../pages/seller/editProduct";
 import SettingsSeller from "./seller/settings";
 
+// Actions
+import { action as signinAction } from "../pages/buyer/signin";
+
 export default function AppRoutes() {
   const router = createBrowserRouter([
     {
@@ -72,6 +75,7 @@ export default function AppRoutes() {
     {
       path: "/signin",
       element: <SignIn />,
+      action: signinAction,
     },
 
     {
