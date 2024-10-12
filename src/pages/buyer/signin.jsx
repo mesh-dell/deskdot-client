@@ -71,6 +71,7 @@ export default function SignIn() {
             id="email"
             type="email"
             name="email"
+            required
           ></Input>
         </div>
 
@@ -81,6 +82,7 @@ export default function SignIn() {
             type="password"
             name="password"
             id="password"
+            required
           ></Input>
         </div>
 
