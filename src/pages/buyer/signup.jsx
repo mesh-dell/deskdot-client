@@ -2,6 +2,11 @@ import { Form } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { createStandaloneToast } from "@chakra-ui/react";
+import { signup } from "../../services/authService";
+import { useActionData } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../context/authContext";
 
 const { toast } = createStandaloneToast();
 
@@ -13,7 +18,6 @@ const specialCharRegex = /(?=.*[@$!%*?&])/;
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
 
   // Validate form
   if (data.password !== data.passwordRepeat) {
@@ -76,9 +80,53 @@ export async function action({ request }) {
     return { error: "Password should have atleast 8 characters long" };
   }
 
-  return { data };
+  delete data.passwordRepeat;
+  const payload = { ...data, role: "buyer" };
+
+  try {
+    const userData = await signup(payload);
+    toast({
+      title: "Signup successful.",
+      description: "Welcome",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+    return { userData };
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      toast({
+        title: "Signup failed.",
+        description: "User already exists.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return { error: "User already exists." };
+    }
+    toast({
+      title: "Error.",
+      description: "Something went wrong. Please try again later.",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+    });
+    console.error(error);
+    return { error: "Something went wrong. Please try again later." };
+  }
 }
 export default function SignUp() {
+  const { setLogin } = useContext(AuthContext);
+  const actionData = useActionData();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (actionData?.userData) {
+      setLogin(actionData.userData);
+      navigate("/");
+    }
+  }, [actionData, setLogin]);
+
   return (
     <div className="mx-auto flex h-screen flex-col items-center justify-center px-8 text-dark-green md:w-2/5">
       <h1 className="mb-2 text-lg font-semibold">Deskdot</h1>
