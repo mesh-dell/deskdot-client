@@ -16,8 +16,13 @@ export default function ProductSection() {
         Here are some of our products
       </h1>
       <div className="flex flex-col justify-around space-y-5 md:flex-row md:space-y-0">
-        {products.products.map((product) => (
-          <ProductCard key={product.product_id} productId={product.product_id} product_name={product.product_name} price={product.price}/>
+        {products.products.slice(0, 3).map((product) => (
+          <ProductCard
+            key={product.product_id}
+            productId={product.product_id}
+            product_name={product.product_name}
+            price={product.price}
+          />
         ))}
       </div>
     </div>
