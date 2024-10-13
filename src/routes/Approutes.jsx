@@ -31,6 +31,7 @@ import { action as signupAction } from "../pages/buyer/signup";
 // loaders
 import { loader as homeProductLoader } from "../components/home/productSection";
 import { loader as shopProductLoader } from "../pages/buyer/shop";
+import { loader as productPageLoader } from "../pages/buyer/product-page";
 
 export default function AppRoutes() {
   const router = createBrowserRouter([
@@ -48,6 +49,7 @@ export default function AppRoutes() {
     {
       path: "/shop/:productId",
       element: <ProductPage />,
+      loader: productPageLoader,
     },
     {
       path: "/cart",
