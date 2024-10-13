@@ -32,115 +32,117 @@ import { action as signupAction } from "../pages/buyer/signup";
 import { loader as homeProductLoader } from "../components/home/productSection";
 import { loader as shopProductLoader } from "../pages/buyer/shop";
 import { loader as productPageLoader } from "../pages/buyer/product-page";
+import { loader as cartLoader } from "../pages/buyer/cart";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+    errorElement: <ErrorPage />,
+    loader: homeProductLoader,
+  },
+  {
+    path: "/shop",
+    element: <Shop />,
+    loader: shopProductLoader,
+  },
+  {
+    path: "/shop/:productId",
+    element: <ProductPage />,
+    loader: productPageLoader,
+  },
+  {
+    path: "/cart",
+    element: <Cart />,
+    loader: cartLoader,
+  },
+  {
+    path: "/account",
+    element: <Account />,
+    children: [
+      {
+        path: "/account",
+        element: <AccountInfo />,
+      },
+      {
+        path: "/account/orders",
+        element: <Orders />,
+      },
+      {
+        path: "/account/orders/:orderId",
+        element: <OrderDetails />,
+      },
+      {
+        path: "/account/settings",
+        element: <Settings />,
+      },
+    ],
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+    action: signupAction,
+  },
+  {
+    path: "/signin",
+    element: <SignIn />,
+    action: signinAction,
+  },
+
+  {
+    path: "/sellers",
+    element: <DiscoverSellers />,
+  },
+  {
+    path: "/shop/seller/:sellerId",
+    element: <Shop />,
+  },
+
+  // Seller
+  {
+    path: "/signup/seller",
+    element: <SignUpSeller />,
+  },
+  {
+    path: "/signup/store/seller",
+    element: <StoreSetup />,
+  },
+  {
+    path: "/signin/seller",
+    element: <SignInSeller />,
+  },
+  {
+    path: "/account/seller",
+    element: <AccountSeller />,
+    children: [
+      {
+        path: "/account/seller",
+        element: <AccountInfoSeller />,
+      },
+      {
+        path: "/account/seller/orders",
+        element: <OrdersSeller />,
+      },
+      {
+        path: "/account/seller/products",
+        element: <Products />,
+      },
+      {
+        path: "/account/seller/settings",
+        element: <SettingsSeller />,
+      },
+    ],
+  },
+  {
+    path: "/seller/products/create",
+    element: <CreateProduct />,
+  },
+  {
+    path: "/seller/products/:productId/edit",
+    element: <EditProduct />,
+  },
+]);
 
 export default function AppRoutes() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <HomePage />,
-      errorElement: <ErrorPage />,
-      loader: homeProductLoader,
-    },
-    {
-      path: "/shop",
-      element: <Shop />,
-      loader: shopProductLoader,
-    },
-    {
-      path: "/shop/:productId",
-      element: <ProductPage />,
-      loader: productPageLoader,
-    },
-    {
-      path: "/cart",
-      element: <Cart />,
-    },
-    {
-      path: "/account",
-      element: <Account />,
-      children: [
-        {
-          path: "/account",
-          element: <AccountInfo />,
-        },
-        {
-          path: "/account/orders",
-          element: <Orders />,
-        },
-        {
-          path: "/account/orders/:orderId",
-          element: <OrderDetails />,
-        },
-        {
-          path: "/account/settings",
-          element: <Settings />,
-        },
-      ],
-    },
-    {
-      path: "/signup",
-      element: <SignUp />,
-      action: signupAction,
-    },
-    {
-      path: "/signin",
-      element: <SignIn />,
-      action: signinAction,
-    },
-
-    {
-      path: "/sellers",
-      element: <DiscoverSellers />,
-    },
-    {
-      path: "/shop/seller/:sellerId",
-      element: <Shop />,
-    },
-
-    // Seller
-    {
-      path: "/signup/seller",
-      element: <SignUpSeller />,
-    },
-    {
-      path: "/signup/store/seller",
-      element: <StoreSetup />,
-    },
-    {
-      path: "/signin/seller",
-      element: <SignInSeller />,
-    },
-    {
-      path: "/account/seller",
-      element: <AccountSeller />,
-      children: [
-        {
-          path: "/account/seller",
-          element: <AccountInfoSeller />,
-        },
-        {
-          path: "/account/seller/orders",
-          element: <OrdersSeller />,
-        },
-        {
-          path: "/account/seller/products",
-          element: <Products />,
-        },
-        {
-          path: "/account/seller/settings",
-          element: <SettingsSeller />,
-        },
-      ],
-    },
-    {
-      path: "/seller/products/create",
-      element: <CreateProduct />,
-    },
-    {
-      path: "/seller/products/:productId/edit",
-      element: <EditProduct />,
-    },
-  ]);
-
   return <RouterProvider router={router} />;
 }
