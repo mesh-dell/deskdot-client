@@ -2,19 +2,126 @@ import NavBar from "../../components/home/navbar";
 import CartProduct from "../../components/cart/cartProduct";
 import OrderSummary from "../../components/cart/orderSummary";
 
+import { getCart } from "../../services/cartService";
+import { refreshToken } from "../../services/authService";
+import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
+import { useContext, useEffect, useState } from "react";
+import { redirect } from "react-router-dom";
+import { getProduct } from "../../services/productService";
+
+import { createStandaloneToast } from "@chakra-ui/react";
+const { toast } = createStandaloneToast();
+
+export async function loader() {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    toast({
+      title: "Info.",
+      description: "Only registered users can access cart.",
+      status: "info",
+      duration: 5000,
+      isClosable: true,
+    });
+    return { error: "Only registered users can access cart." };
+  }
+  try {
+    const cart = await getCart(user);
+
+    return { cart };
+  } catch (error) {
+    if (error.status === 401) {
+      const payload = {
+        refreshToken: user.refreshToken,
+        role: "buyer",
+      };
+      try {
+        const { accessToken } = await refreshToken(payload);
+        return { accessToken };
+      } catch (error) {
+        if (error.status === 403) {
+          return redirect("/signin");
+        }
+      }
+    }
+
+    if (error.status === 404) {
+      toast({
+        title: "Info.",
+        description: "You have no items in cart.",
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+
+    return { error };
+  }
+}
+
 export default function Cart() {
+  const loaderData = useLoaderData();
+  const context = useContext(AuthContext);
+  const [cartProducts, setCartProducts] = useState([]);
+  const { cart } = loaderData;
+
+  // If accessToken is refreshed, update user context
+  useEffect(() => {
+    if (loaderData?.accessToken) {
+      const { setLogin, user } = context;
+      const updatedUser = { ...user, accessToken: loaderData.accessToken };
+      setLogin(updatedUser);
+    }
+  }, [loaderData, context]);
+
+  // Fetch product details for cart items
+  useEffect(() => {
+    if (cart) {
+      const fetchCartProducts = async () => {
+        const fetchedProducts = await Promise.all(
+          cart.map(async (item) => {
+            const product = await getProduct(item.product_id);
+            return {
+              cart_item_id: item.cart_item_id,
+              quantity: item.quantity,
+              product_name: product.product_name,
+              price: product.price * item.quantity,
+              stock: product.quantity,
+            };
+          }),
+        );
+        setCartProducts(fetchedProducts);
+      };
+
+      fetchCartProducts();
+    }
+  }, [cart]);
+
   return (
     <div className="mx-6 *:mb-10 md:mx-10">
       <NavBar />
-      <div className="justify-around space-y-5 md:flex md:space-y-0">
-        <div className="space-y-4 md:w-2/5">
-          <CartProduct />
-          <CartProduct />
-          <CartProduct />
-          <CartProduct />
+      {cart ? (
+        <div className="justify-around space-y-5 md:flex md:space-y-0">
+          <div className="space-y-4 md:w-2/5">
+            {cartProducts.map((product) => (
+              <CartProduct
+                key={product.cart_item_id}
+                id={product.cart_item_id}
+                quantity={product.quantity}
+                price={product.price}
+                name={product.product_name}
+                stock={product.stock}
+              />
+            ))}
+          </div>
+          <OrderSummary total={90} />
         </div>
-        <OrderSummary />
-      </div>
+      ) : (
+        <div className="text-center text-light-grey">
+          Only registered users can access cart.
+        </div>
+      )}
     </div>
   );
 }
