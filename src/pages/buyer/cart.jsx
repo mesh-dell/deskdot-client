@@ -81,7 +81,7 @@ export default function Cart() {
       const updatedUser = { ...user, accessToken: loaderData.accessToken };
       setLogin(updatedUser);
     }
-  }, [loaderData?.accessToken, user, setLogin]);
+  }, [loaderData?.accessToken, setLogin]);
 
   const [cartProducts, setCartProducts] = useState([]);
 

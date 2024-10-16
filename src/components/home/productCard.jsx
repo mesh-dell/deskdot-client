@@ -30,7 +30,7 @@ export default function ProductCard({ productId, price, product_name }) {
       }
       return false;
     }
-  }, [user, setLogin, navigate]);
+  }, [setLogin, navigate]);
 
   const handleClick = async () => {
     if (!user) {
