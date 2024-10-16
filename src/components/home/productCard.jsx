@@ -68,8 +68,29 @@ export default function ProductCard({ productId, price, product_name }) {
       } else if (error.status === 401) {
         const refreshSuccessful = await handleTokenRefresh();
         if (refreshSuccessful) {
-          // Retry adding to cart after successful token refresh
-          handleClick();
+          try {
+            const cartItem = await addToCart(user, payload);
+            toast({
+              title: "Success.",
+              description: "Item added to cart.",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
+          } catch (error) {
+            if (error.status === 400) {
+              toast({
+                title: "Warning.",
+                description: "Item is already in cart.",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+              });
+            }
+            console.error("Failed to add to cart after token refresh", error);
+          }
+        } else {
+          console.error(error);
         }
       }
       console.error(error);
