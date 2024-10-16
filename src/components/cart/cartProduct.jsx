@@ -12,7 +12,14 @@ import { updateQuantity } from "../../services/cartService";
 import { useState } from "react";
 
 // Todo Set maximum quantity to maximum in stock
-export default function CartProduct({ id, quantity, price, name, stock }) {
+export default function CartProduct({
+  id,
+  quantity,
+  price,
+  name,
+  stock,
+  onSubtotalChange,
+}) {
   const [currentQuantity, setCurrentQuantity] = useState(parseInt(quantity));
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -21,6 +28,9 @@ export default function CartProduct({ id, quantity, price, name, stock }) {
     const newQuantity = parseInt(value);
 
     if (newQuantity <= stock) {
+      const previousSubtotal = currentQuantity * parseFloat(price);
+      const newSubtotal = newQuantity * parseFloat(price);
+
       setCurrentQuantity(newQuantity);
 
       const payload = {
@@ -29,6 +39,10 @@ export default function CartProduct({ id, quantity, price, name, stock }) {
 
       try {
         await updateQuantity(user, payload, id);
+
+        if (onSubtotalChange) {
+          onSubtotalChange(newSubtotal - previousSubtotal);
+        }
       } catch (error) {
         console.error("Failed to update quantity:", error);
       }

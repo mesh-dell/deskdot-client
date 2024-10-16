@@ -66,6 +66,12 @@ export async function loader() {
 }
 
 export default function Cart() {
+  const [subTotal, setSubtotal] = useState(0);
+
+  const handleSubtotalChange = (subtotal) => {
+    setSubtotal((prevTotal) => prevTotal + subtotal);
+  };
+
   const loaderData = useLoaderData();
   const { setLogin, user } = useContext(AuthContext);
   const { cart } = loaderData;
@@ -102,6 +108,18 @@ export default function Cart() {
     }
   }, [cart]);
 
+  const calculateTotal = () => {
+    let total = 0;
+    cartProducts.forEach((item) => {
+      total += item.quantity * item.price;
+    });
+    setSubtotal(total);
+  };
+
+  useEffect(() => {
+    calculateTotal();
+  }, [cartProducts]);
+
   return (
     <div className="mx-6 *:mb-10 md:mx-10">
       <NavBar />
@@ -116,10 +134,11 @@ export default function Cart() {
                 price={product.price}
                 name={product.product_name}
                 stock={product.stock}
+                onSubtotalChange={handleSubtotalChange}
               />
             ))}
           </div>
-          <OrderSummary total={90} />
+          <OrderSummary total={subTotal.toFixed(2)} />
         </div>
       ) : (
         <div className="text-center text-light-grey">
