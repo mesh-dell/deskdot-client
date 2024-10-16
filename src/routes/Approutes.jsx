@@ -33,6 +33,7 @@ import { loader as homeProductLoader } from "../components/home/productSection";
 import { loader as shopProductLoader } from "../pages/buyer/shop";
 import { loader as productPageLoader } from "../pages/buyer/product-page";
 import { loader as cartLoader } from "../pages/buyer/cart";
+import { loader as accountLoader } from "./account/accountInfo";
 
 const router = createBrowserRouter([
   {
@@ -59,10 +60,12 @@ const router = createBrowserRouter([
   {
     path: "/account",
     element: <Account />,
+    loader: accountLoader,
     children: [
       {
         path: "/account",
         element: <AccountInfo />,
+        loader: accountLoader,
       },
       {
         path: "/account/orders",
