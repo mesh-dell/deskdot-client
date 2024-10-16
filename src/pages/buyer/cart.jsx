@@ -90,7 +90,7 @@ export default function Cart() {
               cart_item_id: item.cart_item_id,
               quantity: item.quantity,
               product_name: product.product_name,
-              price: product.price * item.quantity,
+              price: product.price,
               stock: product.quantity,
             };
           }),
