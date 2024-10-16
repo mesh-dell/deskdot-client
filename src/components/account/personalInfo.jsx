@@ -9,7 +9,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-export default function PersonalInfo() {
+export default function PersonalInfo({ profile }) {
   return (
     <TableContainer className="font-sans text-dark-green">
       <Table variant="striped" size={"md"}>
@@ -23,9 +23,9 @@ export default function PersonalInfo() {
         </Thead>
         <Tbody>
           <Tr>
-            <Td>Julia</Td>
-            <Td>Tavares</Td>
-            <Td>julia24@gmail.com</Td>
+            <Td>{profile.first_name}</Td>
+            <Td>{profile.last_name}</Td>
+            <Td>{profile.email}</Td>
           </Tr>
         </Tbody>
       </Table>
