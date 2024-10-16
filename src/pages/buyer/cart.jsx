@@ -38,7 +38,12 @@ export async function loader() {
       };
       try {
         const { accessToken } = await refreshToken(payload);
-        return { accessToken };
+
+        const updatedUser = { ...user, accessToken };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+
+        const cart = await getCart(updatedUser);
+        return { cart, accessToken };
       } catch (error) {
         if (error.status === 403) {
           return redirect("/signin");
@@ -62,18 +67,17 @@ export async function loader() {
 
 export default function Cart() {
   const loaderData = useLoaderData();
-  const context = useContext(AuthContext);
-  const [cartProducts, setCartProducts] = useState([]);
+  const { setLogin, user } = useContext(AuthContext);
   const { cart } = loaderData;
 
-  // If accessToken is refreshed, update user context
   useEffect(() => {
     if (loaderData?.accessToken) {
-      const { setLogin, user } = context;
       const updatedUser = { ...user, accessToken: loaderData.accessToken };
       setLogin(updatedUser);
     }
-  }, [loaderData, context]);
+  }, [loaderData?.accessToken, user, setLogin]);
+
+  const [cartProducts, setCartProducts] = useState([]);
 
   // Fetch product details for cart items
   useEffect(() => {
