@@ -8,9 +8,33 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import { updateQuantity } from "../../services/cartService";
+import { useState } from "react";
 
 // Todo Set maximum quantity to maximum in stock
 export default function CartProduct({ id, quantity, price, name, stock }) {
+  const [currentQuantity, setCurrentQuantity] = useState(parseInt(quantity));
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const handleChange = async (value) => {
+    const newQuantity = parseInt(value);
+
+    if (newQuantity <= stock) {
+      setCurrentQuantity(newQuantity);
+
+      const payload = {
+        quantity: newQuantity,
+      };
+
+      try {
+        await updateQuantity(user, payload, id);
+      } catch (error) {
+        console.error("Failed to update quantity:", error);
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center space-y-5 bg-light-white py-3 text-dark-green *:space-y-2 md:flex-row md:space-y-0 md:py-0">
       <div className="h-40 w-40 bg-light-grey">image</div>
@@ -19,10 +43,11 @@ export default function CartProduct({ id, quantity, price, name, stock }) {
         <div className="flex flex-col items-center md:block">
           <h3>Quantity</h3>
           <NumberInput
-            defaultValue={quantity}
+            value={currentQuantity}
             min={1}
             max={stock}
             className="w-28"
+            onChange={handleChange}
           >
             <NumberInputField />
             <NumberInputStepper>
@@ -36,7 +61,7 @@ export default function CartProduct({ id, quantity, price, name, stock }) {
         <button className="text-light-grey">
           <FontAwesomeIcon icon={faX} />
         </button>
-        <h2 className="font-semibold">Ksh. {price}</h2>
+        <h2 className="font-semibold">Ksh. {price * currentQuantity}</h2>
       </div>
     </div>
   );
