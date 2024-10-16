@@ -72,6 +72,12 @@ export default function Cart() {
     setSubtotal((prevTotal) => prevTotal + subtotal);
   };
 
+  const handleRemove = (id) => {
+    setCartProducts((prevProducts) =>
+      prevProducts.filter((product) => product.cart_item_id !== id),
+    );
+  };
+
   const loaderData = useLoaderData();
   const { setLogin, user } = useContext(AuthContext);
   const { cart } = loaderData;
@@ -135,6 +141,7 @@ export default function Cart() {
                 name={product.product_name}
                 stock={product.stock}
                 onSubtotalChange={handleSubtotalChange}
+                onRemove={handleRemove}
               />
             ))}
           </div>

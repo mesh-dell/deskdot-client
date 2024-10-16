@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { updateQuantity } from "../../services/cartService";
 import { useState } from "react";
+import { remove } from "../../services/cartService";
 
 // Todo Set maximum quantity to maximum in stock
 export default function CartProduct({
@@ -19,6 +20,7 @@ export default function CartProduct({
   name,
   stock,
   onSubtotalChange,
+  onRemove,
 }) {
   const [currentQuantity, setCurrentQuantity] = useState(parseInt(quantity));
 
@@ -49,6 +51,17 @@ export default function CartProduct({
     }
   };
 
+  const handleClick = async () => {
+    try {
+      await remove(user, id);
+      if (onRemove) {
+        onRemove(id);
+      }
+    } catch (error) {
+      console.error("Failed to remove item:", error);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center space-y-5 bg-light-white py-3 text-dark-green *:space-y-2 md:flex-row md:space-y-0 md:py-0">
       <div className="h-40 w-40 bg-light-grey">image</div>
@@ -72,7 +85,7 @@ export default function CartProduct({
         </div>
       </div>
       <div className="flex space-x-3 md:ml-24 md:block md:space-x-0 md:space-y-20">
-        <button className="text-light-grey">
+        <button className="text-light-grey" onClick={handleClick} type="submit">
           <FontAwesomeIcon icon={faX} />
         </button>
         <h2 className="font-semibold">Ksh. {price * currentQuantity}</h2>
