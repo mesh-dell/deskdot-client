@@ -83,11 +83,14 @@ export default function Cart() {
   const { cart } = loaderData;
 
   useEffect(() => {
-    if (loaderData?.accessToken) {
+    if (
+      loaderData?.accessToken &&
+      loaderData?.accessToken !== user?.accessToken
+    ) {
       const updatedUser = { ...user, accessToken: loaderData.accessToken };
       setLogin(updatedUser);
     }
-  }, [loaderData?.accessToken, setLogin]);
+  }, [loaderData?.accessToken, user?.accessToken, setLogin]);
 
   const [cartProducts, setCartProducts] = useState([]);
 
