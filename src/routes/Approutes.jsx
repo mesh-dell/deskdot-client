@@ -35,6 +35,7 @@ import { loader as shopProductLoader } from "../pages/buyer/shop";
 import { loader as productPageLoader } from "../pages/buyer/product-page";
 import { loader as cartLoader } from "../pages/buyer/cart";
 import { loader as accountLoader } from "./account/accountInfo";
+import { loader as orderDetailsLoader } from "./account/orderDetails";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,7 @@ const router = createBrowserRouter([
       {
         path: "/account/orders/:orderId",
         element: <OrderDetails />,
+        loader: orderDetailsLoader,
       },
       {
         path: "/account/settings",
