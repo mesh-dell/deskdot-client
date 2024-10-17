@@ -72,6 +72,10 @@ export default function Cart() {
     setSubtotal((prevTotal) => prevTotal + subtotal);
   };
 
+  const handleCartClear = () => {
+    setCartProducts([]);
+  };
+
   const handleRemove = (id) => {
     setCartProducts((prevProducts) =>
       prevProducts.filter((product) => product.cart_item_id !== id),
@@ -148,7 +152,10 @@ export default function Cart() {
               />
             ))}
           </div>
-          <OrderSummary total={subTotal.toFixed(2)} />
+          <OrderSummary
+            total={subTotal.toFixed(2)}
+            handleCartClear={handleCartClear}
+          />
         </div>
       ) : (
         <div className="text-center text-light-grey">
