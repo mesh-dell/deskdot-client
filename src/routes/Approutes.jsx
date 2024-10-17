@@ -27,6 +27,7 @@ import SettingsSeller from "./seller/settings";
 // Actions
 import { action as signinAction } from "../pages/buyer/signin";
 import { action as signupAction } from "../pages/buyer/signup";
+import { action as settingsAction } from "./account/settings";
 
 // loaders
 import { loader as homeProductLoader } from "../components/home/productSection";
@@ -79,6 +80,8 @@ const router = createBrowserRouter([
       {
         path: "/account/settings",
         element: <Settings />,
+        loader: accountLoader,
+        action: settingsAction,
       },
     ],
   },
