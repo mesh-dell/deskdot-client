@@ -10,6 +10,11 @@ import {
 } from "@chakra-ui/react";
 
 export default function RecentOrders({ orders }) {
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return d.toLocaleString();
+  };
+
   const calculateTotal = (order) => {
     let totalCost = 0;
 
@@ -37,7 +42,7 @@ export default function RecentOrders({ orders }) {
           {orders.orders.map((order) => (
             <Tr key={order.order_id}>
               <Td>{order.order_id}</Td>
-              <Td>{order.order_date}</Td>
+              <Td>{formatDate(order.order_date)}</Td>
               <Td>ksh. {calculateTotal(order)}</Td>
             </Tr>
           ))}

@@ -25,6 +25,11 @@ export default function Orders() {
     return totalCost;
   };
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return d.toLocaleString();
+  };
+
   return (
     <div className="text-dark-green">
       <h1 className="font-semibold">Your Orders</h1>
@@ -43,7 +48,7 @@ export default function Orders() {
             {orders.orders.map((order) => (
               <Tr key={order.order_id}>
                 <Td>{order.order_id}</Td>
-                <Td>{order.order_date}</Td>
+                <Td>{formatDate(order.order_date)}</Td>
                 <Td>Ksh. {calculateTotal(order)}</Td>
                 <Td>
                   <Link
