@@ -14,6 +14,17 @@ import { Link, useLoaderData } from "react-router-dom";
 export default function Orders() {
   const { orders } = useLoaderData();
 
+  const calculateTotal = (order) => {
+    let totalCost = 0;
+
+    order.items.forEach((item) => {
+      const itemCost = parseFloat(item.price) * parseInt(item.quantity);
+      totalCost += itemCost;
+    });
+
+    return totalCost;
+  };
+
   return (
     <div className="text-dark-green">
       <h1 className="font-semibold">Your Orders</h1>
@@ -33,7 +44,7 @@ export default function Orders() {
               <Tr key={order.order_id}>
                 <Td>{order.order_id}</Td>
                 <Td>{order.order_date}</Td>
-                <Td>Ksh. 779</Td>
+                <Td>Ksh. {calculateTotal(order)}</Td>
                 <Td>
                   <Link
                     className="underline"
