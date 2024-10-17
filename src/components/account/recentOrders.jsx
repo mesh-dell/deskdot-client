@@ -9,7 +9,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-export default function RecentOrders() {
+export default function RecentOrders({ orders }) {
   return (
     <TableContainer className="font-sans text-dark-green">
       <Table variant="striped" size={"md"}>
@@ -21,22 +21,15 @@ export default function RecentOrders() {
             <Th>Order Cost</Th>
           </Tr>
         </Thead>
+
         <Tbody>
-          <Tr>
-            <Td>34</Td>
-            <Td>24 June 2013</Td>
-            <Td>ksh. 890</Td>
-          </Tr>
-          <Tr>
-            <Td>34</Td>
-            <Td>24 June 2013</Td>
-            <Td>ksh. 890</Td>
-          </Tr>
-          <Tr>
-            <Td>34</Td>
-            <Td>24 June 2013</Td>
-            <Td>ksh. 890</Td>
-          </Tr>
+          {orders.orders.map((order) => (
+            <Tr>
+              <Td>{order.order_id}</Td>
+              <Td>{order.order_date}</Td>
+              <Td>ksh. 500</Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </TableContainer>
