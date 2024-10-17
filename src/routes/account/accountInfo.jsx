@@ -3,6 +3,7 @@ import RecentOrders from "../../components/account/recentOrders";
 import { useLoaderData } from "react-router-dom";
 import { getProfile } from "../../services/userService";
 import { refreshToken } from "../../services/authService";
+import { getOrders } from "../../services/orderService";
 
 export async function loader() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -11,7 +12,8 @@ export async function loader() {
   }
   try {
     const profile = await getProfile(user);
-    return { profile };
+    const orders = await getOrders(user);
+    return { profile, orders };
   } catch (error) {
     if (error.status === 401) {
       // Refresh token
@@ -24,7 +26,8 @@ export async function loader() {
         const updatedUser = { ...user, accessToken };
         localStorage.setItem("user", JSON.stringify(updatedUser));
         const profile = await getProfile(updatedUser);
-        return { profile, accessToken };
+        const orders = await getOrders(updatedUser);
+        return { profile, accessToken, orders };
       } catch (error) {
         if (error.status === 403) {
           return redirect("/signin");
@@ -36,12 +39,12 @@ export async function loader() {
 }
 
 export default function AccountInfo() {
-  const { profile } = useLoaderData();
+  const { profile, orders } = useLoaderData();
 
   return (
     <div>
       <PersonalInfo profile={profile} />
-      <RecentOrders />
+      <RecentOrders orders={orders} />
     </div>
   );
 }
