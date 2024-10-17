@@ -9,9 +9,11 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 export default function Orders() {
+  const { orders } = useLoaderData();
+
   return (
     <div className="text-dark-green">
       <h1 className="font-semibold">Your Orders</h1>
@@ -27,14 +29,21 @@ export default function Orders() {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>34</Td>
-              <Td>24th June 2024</Td>
-              <Td>Ksh. 779</Td>
-              <Td>
-                <Link className="underline" to={`/account/orders/34`}>Expand</Link>
-              </Td>
-            </Tr>
+            {orders.orders.map((order) => (
+              <Tr>
+                <Td>{order.order_id}</Td>
+                <Td>{order.order_date}</Td>
+                <Td>Ksh. 779</Td>
+                <Td>
+                  <Link
+                    className="underline"
+                    to={`/account/orders/${order.order_id}`}
+                  >
+                    Expand
+                  </Link>
+                </Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </TableContainer>

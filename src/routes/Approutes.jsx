@@ -70,6 +70,7 @@ const router = createBrowserRouter([
       {
         path: "/account/orders",
         element: <Orders />,
+        loader: accountLoader,
       },
       {
         path: "/account/orders/:orderId",
