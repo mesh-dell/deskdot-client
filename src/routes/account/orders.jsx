@@ -30,7 +30,7 @@ export default function Orders() {
           </Thead>
           <Tbody>
             {orders.orders.map((order) => (
-              <Tr>
+              <Tr key={order.order_id}>
                 <Td>{order.order_id}</Td>
                 <Td>{order.order_date}</Td>
                 <Td>Ksh. 779</Td>
