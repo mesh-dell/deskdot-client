@@ -13,23 +13,41 @@ import OrderItem from "../../components/orders/orderItem";
 import { getOrder } from "../../services/orderService";
 import { useLoaderData } from "react-router-dom";
 import { getProduct } from "../../services/productService";
+import { cancel } from "../../services/orderService";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 export async function loader({ params }) {
   const { orderId } = params;
   const user = JSON.parse(localStorage.getItem("user"));
-  const order = await getOrder(user, orderId);
+  try {
+    const order = await getOrder(user, orderId);
 
-  const orderItemsWithProducts = await Promise.all(
-    order.orderItems.map(async (item) => {
-      const product = await getProduct(item.product_id);
-      return { ...item, productName: product.product_name }; // Attach product name
-    }),
-  );
+    const orderItemsWithProducts = await Promise.all(
+      order.orderItems.map(async (item) => {
+        const product = await getProduct(item.product_id);
+        return { ...item, productName: product.product_name }; // Attach product name
+      }),
+    );
 
-  return { order: { ...order, orderItems: orderItemsWithProducts } };
+    return { order: { ...order, orderItems: orderItemsWithProducts } };
+  } catch (error) {
+    console.error(error);
+    return { error };
+  }
 }
 
 export default function OrderDetails() {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { order } = useLoaderData();
+
+  const handleClick = async () => {
+    const canceledOrder = await cancel(user, order.order.order_id);
+    navigate("/account/orders");
+  };
+
   const formatDate = (date) => {
     const d = new Date(date);
     return d.toLocaleString();
@@ -46,14 +64,14 @@ export default function OrderDetails() {
     return totalCost;
   };
 
-  const { order } = useLoaderData();
-  console.log(order);
-
   return (
     <div className="space-y-5 text-dark-green">
       <div className="mb-5 flex items-center justify-between">
         <h1 className="font-semibold">Order Details</h1>
-        <button className="rounded-md bg-light-green px-6 py-2 font-semibold">
+        <button
+          className="rounded-md bg-light-green px-6 py-2 font-semibold"
+          onClick={handleClick}
+        >
           Cancel
         </button>
       </div>
