@@ -30,6 +30,7 @@ import { action as signupAction } from "../pages/buyer/signup";
 import { action as settingsAction } from "./account/settings";
 import { action as sellerSignupAction } from "../pages/seller/signup";
 import { action as sellerStoreAction } from "../pages/seller/storeSetup";
+import { action as sellerSigninAction } from "../pages/seller/signin";
 
 // loaders
 import { loader as homeProductLoader } from "../components/home/productSection";
@@ -123,6 +124,7 @@ const router = createBrowserRouter([
   {
     path: "/signin/seller",
     element: <SignInSeller />,
+    action: sellerSigninAction,
   },
   {
     path: "/account/seller",
