@@ -39,6 +39,7 @@ import { loader as productPageLoader } from "../pages/buyer/product-page";
 import { loader as cartLoader } from "../pages/buyer/cart";
 import { loader as accountLoader } from "./account/accountInfo";
 import { loader as orderDetailsLoader } from "./account/orderDetails";
+import { loader as sellerAccountLoader } from "./seller/accountInfo";
 
 const router = createBrowserRouter([
   {
@@ -129,10 +130,12 @@ const router = createBrowserRouter([
   {
     path: "/account/seller",
     element: <AccountSeller />,
+    loader: sellerAccountLoader,
     children: [
       {
         path: "/account/seller",
         element: <AccountInfoSeller />,
+        loader: sellerAccountLoader,
       },
       {
         path: "/account/seller/orders",
