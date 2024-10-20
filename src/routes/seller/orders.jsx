@@ -10,15 +10,20 @@ import {
 } from "@chakra-ui/react";
 
 import SelectStatus from "../../components/seller/selectStatus";
+import { useLoaderData } from "react-router-dom";
 
 export default function OrdersSeller() {
+  const { orders } = useLoaderData();
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return d.toLocaleString();
+  };
+
   return (
-    <div className="text-dark-green space-y-10">
+    <div className="space-y-10 text-dark-green">
       <div className="flex items-center justify-between">
         <h1 className="font-semibold">Your Orders</h1>
-        <button className="rounded-md bg-light-green px-6 py-2 font-semibold">
-          Update Status
-        </button>
       </div>
 
       <TableContainer className="font-sans text-dark-green">
@@ -35,16 +40,21 @@ export default function OrdersSeller() {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>34</Td>
-              <Td>5</Td>
-              <Td>10</Td>
-              <Td>
-                <SelectStatus />
-              </Td>
-              <Td>24th June 2024</Td>
-              <Td>Ksh. 779</Td>
-            </Tr>
+            {orders.map((order) => (
+              <Tr key={order.order_item_id}>
+                <Td>{order.order_id}</Td>
+                <Td>{order.product_id}</Td>
+                <Td>{order.quantity}</Td>
+                <Td>
+                  <SelectStatus
+                    status={order.status}
+                    id={order.order_item_id}
+                  />
+                </Td>
+                <Td>{formatDate(order.order_date)}</Td>
+                <Td>Ksh. {parseFloat(order.price) * order.quantity}</Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </TableContainer>

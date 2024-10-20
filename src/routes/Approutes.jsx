@@ -140,6 +140,7 @@ const router = createBrowserRouter([
       {
         path: "/account/seller/orders",
         element: <OrdersSeller />,
+        loader: sellerAccountLoader,
       },
       {
         path: "/account/seller/products",
