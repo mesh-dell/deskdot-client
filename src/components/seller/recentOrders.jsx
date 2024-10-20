@@ -9,7 +9,10 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-export default function RecentOrders() {
+export default function RecentOrders({ orders }) {
+  const formatDate = (date) => {
+    return new Date(date).toLocaleString();
+  };
   return (
     <TableContainer className="font-sans text-dark-green">
       <Table variant="striped" size={"md"}>
@@ -25,30 +28,16 @@ export default function RecentOrders() {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>34</Td>
-            <Td>5</Td>
-            <Td>10</Td>
-            <Td>Shipped</Td>
-            <Td>24th June 2024</Td>
-            <Td>ksh. 890</Td>
-          </Tr>
-          <Tr>
-            <Td>34</Td>
-            <Td>5</Td>
-            <Td>10</Td>
-            <Td>Shipped</Td>
-            <Td>24th June 2024</Td>
-            <Td>ksh. 890</Td>
-          </Tr>
-          <Tr>
-            <Td>34</Td>
-            <Td>5</Td>
-            <Td>10</Td>
-            <Td>Shipped</Td>
-            <Td>24th June 2024</Td>
-            <Td>ksh. 890</Td>
-          </Tr>
+          {orders.map((order) => (
+            <Tr key={order.order_item_id}>
+              <Td>{order.order_id}</Td>
+              <Td>{order.product_id}</Td>
+              <Td>{order.quantity}</Td>
+              <Td>{order.status}</Td>
+              <Td>{formatDate(order.order_date)}</Td>
+              <Td>ksh. {parseFloat(order.price) * order.quantity}</Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </TableContainer>
