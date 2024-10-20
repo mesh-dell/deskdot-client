@@ -26,8 +26,8 @@ const editProduct = async (productId, product, user) => {
   return response.data;
 };
 
-const deleteProduct = async (productId, product, user) => {
-  const response = await axios.delete(`${API_URL}/${productId}`, product, {
+const deleteProduct = async (productId, user) => {
+  const response = await axios.delete(`${API_URL}/${productId}`, {
     headers: { Authorization: `Bearer ${user.accessToken}` },
   });
   return response.data;
