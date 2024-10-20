@@ -40,6 +40,7 @@ import { loader as cartLoader } from "../pages/buyer/cart";
 import { loader as accountLoader } from "./account/accountInfo";
 import { loader as orderDetailsLoader } from "./account/orderDetails";
 import { loader as sellerAccountLoader } from "./seller/accountInfo";
+import { loader as productLoader } from "./seller/products";
 
 const router = createBrowserRouter([
   {
@@ -145,6 +146,7 @@ const router = createBrowserRouter([
       {
         path: "/account/seller/products",
         element: <Products />,
+        loader: productLoader,
       },
       {
         path: "/account/seller/settings",
