@@ -9,7 +9,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-export default function StoreInfo() {
+export default function StoreInfo({ profile }) {
   return (
     <TableContainer className="font-sans text-dark-green">
       <Table variant="striped" size={"md"}>
@@ -22,11 +22,8 @@ export default function StoreInfo() {
         </Thead>
         <Tbody>
           <Tr>
-            <Td>Corvette Stationery</Td>
-            <Td>
-              Take your love for speed and style to a whole new level with our
-              exclusive Corvette stationery collection!
-            </Td>
+            <Td>{profile.store_name}</Td>
+            <Td>{profile.store_description}</Td>
           </Tr>
         </Tbody>
       </Table>

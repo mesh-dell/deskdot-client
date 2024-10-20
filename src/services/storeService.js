@@ -26,4 +26,4 @@ const getSellerOrders = async (user) => {
   return response.data;
 };
 
-return { getStore, getStores, getStoreProducts, getSellerOrders };
+export { getStore, getStores, getStoreProducts, getSellerOrders };
