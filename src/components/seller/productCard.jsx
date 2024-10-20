@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
 
-export default function ProductCard() {
+export default function ProductCard({ id, name, quantity, price }) {
   return (
     <div className="flex flex-col items-center space-y-3 bg-light-white py-2 text-center text-dark-green md:flex md:flex-row md:py-0 md:text-left">
       <div className="h-40 w-40 bg-light-grey">Image</div>
       <div className="space-y-3 md:ml-5">
-        <h1 className="font-semibold">Visocin Stapeler</h1>
+        <h1 className="font-semibold">{name}</h1>
         <div className="flex justify-center space-x-3 md:justify-start">
           <h2>Quantity</h2>
-          <h2>3</h2>
+          <h2>{quantity}</h2>
         </div>
-        <h2>Ksh 450</h2>
+        <h2>Ksh {price}</h2>
       </div>
       <div className="space-x-3 underline md:mx-16">
-        <Link to={"/seller/products/1/edit"}>Edit</Link>
+        <Link to={`/seller/products/${id}/edit`}>Edit</Link>
         <button className="text-light-grey underline">Delete</button>
       </div>
     </div>
