@@ -12,15 +12,28 @@ export default function ProductCard({
 }) {
   const handleClick = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
-    await deleteProduct(id, user);
-    handleDelete(id);
-    toast({
-      title: "Success.",
-      description: "Deleted product succesfully!",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
+    try {
+      await deleteProduct(id, user);
+      handleDelete(id);
+      toast({
+        title: "Success.",
+        description: "Deleted product succesfully!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      if (error.status === 403) {
+        toast({
+          title: "Warning.",
+          description:
+            "Cannot delete a product that has already been ordered.!",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    }
   };
   return (
     <div className="flex flex-col items-center space-y-3 bg-light-white py-2 text-center text-dark-green md:flex md:flex-row md:py-0 md:text-left">
