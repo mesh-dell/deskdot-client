@@ -32,6 +32,7 @@ import { action as sellerSignupAction } from "../pages/seller/signup";
 import { action as sellerStoreAction } from "../pages/seller/storeSetup";
 import { action as sellerSigninAction } from "../pages/seller/signin";
 import { action as editProductAction } from "../pages/seller/editProduct";
+import { action as sellerSettingsAction } from "./seller/settings";
 
 // loaders
 import { loader as homeProductLoader } from "../components/home/productSection";
@@ -153,6 +154,8 @@ const router = createBrowserRouter([
       {
         path: "/account/seller/settings",
         element: <SettingsSeller />,
+        loader: sellerAccountLoader,
+        action: sellerSettingsAction,
       },
     ],
   },
