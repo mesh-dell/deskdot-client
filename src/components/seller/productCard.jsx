@@ -1,6 +1,27 @@
 import { Link } from "react-router-dom";
+import { deleteProduct } from "../../services/productService";
+import { createStandaloneToast } from "@chakra-ui/react";
 
-export default function ProductCard({ id, name, quantity, price }) {
+const { toast } = createStandaloneToast();
+export default function ProductCard({
+  id,
+  name,
+  quantity,
+  price,
+  handleDelete,
+}) {
+  const handleClick = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    await deleteProduct(id, user);
+    handleDelete(id);
+    toast({
+      title: "Success.",
+      description: "Deleted product succesfully!",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
   return (
     <div className="flex flex-col items-center space-y-3 bg-light-white py-2 text-center text-dark-green md:flex md:flex-row md:py-0 md:text-left">
       <div className="h-40 w-40 bg-light-grey">Image</div>
@@ -14,7 +35,9 @@ export default function ProductCard({ id, name, quantity, price }) {
       </div>
       <div className="space-x-3 underline md:mx-16">
         <Link to={`/seller/products/${id}/edit`}>Edit</Link>
-        <button className="text-light-grey underline">Delete</button>
+        <button className="text-light-grey underline" onClick={handleClick}>
+          Delete
+        </button>
       </div>
     </div>
   );
