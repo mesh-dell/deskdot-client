@@ -1,6 +1,7 @@
 import ProductCard from "../../components/seller/productCard";
 import { Link, useLoaderData } from "react-router-dom";
 import { getStoreProducts } from "../../services/storeService";
+import { useState } from "react";
 
 export async function loader() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -16,6 +17,12 @@ export async function loader() {
 export default function Products() {
   const { products } = useLoaderData();
 
+  const [currentProducts, setProducts] = useState(products.products);
+
+  const deleteProduct = (id) => {
+    setProducts(currentProducts.filter((product) => product.product_id != id));
+  };
+
   return (
     <div className="space-y-10 text-dark-green">
       <div className="flex items-center justify-between">
@@ -29,13 +36,14 @@ export default function Products() {
       </div>
 
       <div className="grid-cols-2 gap-5 space-y-3 md:grid md:space-y-0">
-        {products.products.map((product) => (
+        {currentProducts.map((product) => (
           <ProductCard
             key={product.product_id}
             id={product.product_id}
             name={product.product_name}
             quantity={product.quantity}
             price={product.price}
+            handleDelete={deleteProduct}
           />
         ))}
       </div>
