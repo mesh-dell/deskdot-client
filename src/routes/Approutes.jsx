@@ -33,6 +33,7 @@ import { action as sellerStoreAction } from "../pages/seller/storeSetup";
 import { action as sellerSigninAction } from "../pages/seller/signin";
 import { action as editProductAction } from "../pages/seller/editProduct";
 import { action as sellerSettingsAction } from "./seller/settings";
+import { action as productAction } from "../pages/seller/createProduct";
 
 // loaders
 import { loader as homeProductLoader } from "../components/home/productSection";
@@ -162,6 +163,7 @@ const router = createBrowserRouter([
   {
     path: "/seller/products/create",
     element: <CreateProduct />,
+    action: productAction,
   },
   {
     path: "/seller/products/:productId/edit",
