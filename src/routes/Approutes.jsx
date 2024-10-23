@@ -116,6 +116,7 @@ const router = createBrowserRouter([
   {
     path: "/shop/seller/:sellerId",
     element: <Shop />,
+    loader: shopProductLoader,
   },
 
   // Seller
