@@ -26,19 +26,25 @@ export default function AccountSeller() {
   return (
     <div className="mx-6 *:mb-10 md:mx-10">
       <NavBarSeller />
-      <div className="items-start md:flex">
-        <div>
-          <div className="my-10 flex items-center justify-between md:my-0 md:block">
-            <LoginInfo profile={profile} />
-            <ProfileMenuSeller />
+      {profile ? (
+        <div className="items-start md:flex">
+          <div>
+            <div className="my-10 flex items-center justify-between md:my-0 md:block">
+              <LoginInfo profile={profile} />
+              <ProfileMenuSeller />
+            </div>
+            <SideBarSeller />
           </div>
-          <SideBarSeller />
-        </div>
 
-        <div className="w-full md:ml-20">
-          <Outlet />
+          <div className="w-full md:ml-20">
+            <Outlet />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="text-center text-light-grey">
+          Only registered users can access dashboard.
+        </div>
+      )}
     </div>
   );
 }
