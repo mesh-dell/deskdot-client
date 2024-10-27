@@ -25,14 +25,14 @@ export default function Shop() {
   return (
     <div className="mx-6 *:mb-10 md:mx-10">
       <NavBar /> <BreadCrumb />
+      {products.length == 0 ? (
+        <div className="mx-auto text-center text-light-grey">
+          There are no products
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="flex grid-cols-3 flex-col justify-items-center space-y-5 md:grid md:space-y-0">
-        {products.length == 0 ? (
-          <div className="text-center text-light-grey">
-            There are no products
-          </div>
-        ) : (
-          <></>
-        )}
         {products.map((product) => (
           <ProductCard
             key={product.product_id}
