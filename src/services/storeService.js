@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:5000/api/stores";
+const API_URL = "https://api.deskdot.cfd/api/stores";
 
 const getStores = async () => {
   const response = await axios.get(`${API_URL}/`);

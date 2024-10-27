@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:5000/api/auth";
+const API_URL = "https://api.deskdot.cfd/api/auth";
 
 const login = async (credentials) => {
   const response = await axios.post(`${API_URL}/login`, credentials);

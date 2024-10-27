@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:5000/api/users";
+const API_URL = "https://api.deskdot.cfd/api/users";
 
 const getProfile = async (user) => {
   const response = await axios.get(`${API_URL}/profile`, {
